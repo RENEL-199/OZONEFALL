@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"InventoryItemTransform",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"InventoryItemTransform",
+  "parent":{
+    "name":"Inventory",
+    "path":"folders/Scripts/Inventory.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"TreeHarvestSystem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TreeHarvestSystem",
+  "parent":{
+    "name":"Restoration",
+    "path":"folders/Scripts/Restoration.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

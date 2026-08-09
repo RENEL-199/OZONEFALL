@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"CraftingUILayout",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CraftingUILayout",
+  "parent":{
+    "name":"System",
+    "path":"folders/Scripts/System.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

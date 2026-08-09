@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PlacementSystem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PlacementSystem",
+  "parent":{
+    "name":"System",
+    "path":"folders/Scripts/System.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

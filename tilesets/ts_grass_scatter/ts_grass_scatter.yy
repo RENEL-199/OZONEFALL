@@ -1,0 +1,43 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"ts_grass_scatter",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":13,
+    "SerialiseWidth":24,
+    "TileCompressedData":[
+      -133,0,3,5,6,7,-7,6,1,8,-13,0,11,18,19,59,59,19,19,59,19,59,19,21,-13,0,11,18,59,59,19,59,19,59,59,19,
+      19,21,-13,0,6,31,32,32,33,32,33,-4,32,1,34,-13,0,5,56,60,59,59,60,-5,59,1,61,-13,0,11,56,59,59,60,9,
+      10,11,12,40,59,61,-13,0,11,56,57,60,41,22,23,24,25,40,59,61,-13,0,4,69,70,72,55,-4,36,3,52,72,74,
+    ],
+    "TileDataFormat":1,
+  },
+  "name":"ts_grass_scatter",
+  "out_columns":2,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Tile Sets",
+    "path":"folders/Tile Sets.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"spr_grass_scatter_tileset",
+    "path":"sprites/spr_grass_scatter_tileset/spr_grass_scatter_tileset.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":16,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":16,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":4,
+}

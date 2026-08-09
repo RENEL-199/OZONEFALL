@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"CoreSaveFileIO",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CoreSaveFileIO",
+  "parent":{
+    "name":"Settings",
+    "path":"folders/Scripts/Settings.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

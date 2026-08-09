@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"VegetationHarvestSystem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"VegetationHarvestSystem",
+  "parent":{
+    "name":"System",
+    "path":"folders/Scripts/System.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

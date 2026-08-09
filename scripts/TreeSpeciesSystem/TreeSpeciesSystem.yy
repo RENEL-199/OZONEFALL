@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"TreeSpeciesSystem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TreeSpeciesSystem",
+  "parent":{
+    "name":"Restoration",
+    "path":"folders/Scripts/Restoration.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
