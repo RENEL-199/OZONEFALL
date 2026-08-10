@@ -12,8 +12,8 @@
     "path":"folders/Objects/Foods/spoiled.yy",
   },
   "parentObjectId":{
-    "name":"obj_pickup_parent",
-    "path":"objects/obj_pickup_parent/obj_pickup_parent.yy",
+    "name":"obj_pickable_parent",
+    "path":"objects/obj_pickable_parent/obj_pickable_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

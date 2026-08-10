@@ -28,7 +28,9 @@ enum ItemID
 	Watering_Can = 23,
 	Hoe = 24,
 	Pumpkin_seed = 25,
-	Pumpkin = 26
+	Pumpkin = 26,
+	Kamote_seed = 27,
+	Kamote = 28
 }
 
 
@@ -166,6 +168,34 @@ function item_database_create()
         {
             _survival.add_hunger(15);
             _survival.add_toxicity(10);
+
+            return true;
+        }
+    );
+	
+	global.item_database[ItemID.Kamote] =
+    new ItemData(
+        "Kamote",
+        spr_kamote,
+        10,
+        "A Kamote. Restores 10 Hunger but adds 6 Toxicity.",
+
+        function(_survival)
+        {
+            if (_survival.is_dead)
+            {
+                return false;
+            }
+
+            return
+                _survival.hunger <
+                _survival.max_hunger;
+        },
+
+        function(_survival)
+        {
+            _survival.add_hunger(10);
+            _survival.add_toxicity(8);
 
             return true;
         }
@@ -538,51 +568,38 @@ global.item_database[ItemID.Compost] =
         undefined,
 
         new ItemPlacementData(
-            obj_plantable_soil,
+    obj_farm_plot,
+    spr_soils,
 
-            object_get_sprite(
-                obj_plantable_soil
-            ),
-
-            {
-                grid_size   : 16,
-                cell_width  : 16,
-                cell_height : 16
-            }
-        )
+    {
+        grid_size   : 16,
+        cell_width  : 16,
+        cell_height : 16
+    }
+)
     );
 	
 	
-	//// SEED ////
-	global.item_database[
+	
+	
+//Farm Seed
+global.item_database[
     ItemID.Pumpkin_seed
 ] = new ItemData(
     "Pumpkin Seeds",
-
     spr_seeds,
-
     99,
-
-    "Pumpkin seeds that can be planted in prepared soil.",
-
-    undefined,
-    undefined,
-
-    new ItemPlacementData(
-        obj_pumpkin,
-
-        spr_pumpkin_sheet,
-
-        {
-            grid_size    : 16,
-            cell_width   : 16,
-            cell_height  : 16,
-            crop_id      : CropID.Pumpkin
-        }
-    )
+    "Pumpkin seeds that can be planted in prepared soil."
 );
-	
-	
+
+global.item_database[
+    ItemID.Kamote_seed
+] = new ItemData(
+    "Kamote Seeds",
+    spr_kamote_seed,
+    99,
+    "Kamote seeds that can be planted in prepared soil."
+);
 	
 	
 	

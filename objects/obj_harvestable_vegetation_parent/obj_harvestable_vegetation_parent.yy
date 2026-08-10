@@ -13,10 +13,7 @@
     "name":"controllers",
     "path":"folders/Objects/controllers.yy",
   },
-  "parentObjectId":{
-    "name":"obj_fadeble",
-    "path":"objects/obj_fadeble/obj_fadeble.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

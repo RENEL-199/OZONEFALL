@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"FarmingRuntimeSystem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"FarmingRuntimeSystem",
+  "parent":{
+    "name":"Farming",
+    "path":"folders/Scripts/Farming.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

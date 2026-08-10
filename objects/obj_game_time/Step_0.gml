@@ -1,7 +1,7 @@
 /// obj_game_time — Step Event
 
 if (keyboard_check(vk_alt)) {
-	global.game_time.add_hours(24); // for debuging
+	global.game_time.add_hours(1); // for debuging
 }
 
 if (!variable_global_exists("game_time"))

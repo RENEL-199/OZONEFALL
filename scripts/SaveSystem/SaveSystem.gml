@@ -1,5 +1,6 @@
 /// SaveSystem.gml
 
+
 function core_save_get(
     _source,
     _key,
@@ -49,6 +50,11 @@ function core_save_get_number(
     return _value;
 }
 
+
+// ====================================================================
+// CONVERT INVENTORY INTO SAVE DATA
+// ====================================================================
+
 function core_save_inventory_to_data(
     _inventory
 )
@@ -76,23 +82,34 @@ function core_save_inventory_to_data(
 
         var _saved_slot =
         {
-            item_id : _slot.item_id,
-            amount  : _slot.amount
+            item_id: _slot.item_id,
+            amount: _slot.amount
         };
 
-        if (!is_undefined(_slot.state))
+        if (
+            variable_struct_exists(
+                _slot,
+                "state"
+            ) &&
+            !is_undefined(_slot.state)
+        )
         {
             _saved_slot.state =
                 _slot.state;
         }
 
-        _saved_slots[_slot_index] =
-            _saved_slot;
+        _saved_slots[
+            _slot_index
+        ] = _saved_slot;
     }
 
     return _saved_slots;
 }
 
+
+// ====================================================================
+// BUILD COMPLETE SAVE DATA
+// ====================================================================
 
 function core_save_build_data()
 {
@@ -149,12 +166,12 @@ function core_save_build_data()
             global.hotbar_selected;
     }
 
-  var _save_data =
-{
-    save_version: 1,
+    var _save_data =
+    {
+        save_version: 2,
 
-    saved_at:
-        date_current_datetime(),
+        saved_at:
+            date_current_datetime(),
 
         room_name:
             room_get_name(room),
@@ -216,12 +233,19 @@ function core_save_build_data()
             minute_fraction:
                 global.game_time
                     .minute_fraction
-        }
+        },
+
+        farming_world:
+            farming_save_build_data()
     };
 
     return _save_data;
 }
 
+
+// ====================================================================
+// RESTORE INVENTORY
+// ====================================================================
 
 function core_save_apply_inventory(
     _inventory,
@@ -254,15 +278,31 @@ function core_save_apply_inventory(
         _clear_index++
     )
     {
-        _inventory.slots[
-            _clear_index
-        ].clear();
+        var _clear_slot =
+            _inventory.slots[
+                _clear_index
+            ];
+
+        _clear_slot.clear();
+
+        if (
+            variable_struct_exists(
+                _clear_slot,
+                "state"
+            )
+        )
+        {
+            _clear_slot.state =
+                undefined;
+        }
     }
 
     var _slots_to_restore =
         min(
             _inventory.size,
-            array_length(_saved_slots)
+            array_length(
+                _saved_slots
+            )
         );
 
     for (
@@ -353,6 +393,10 @@ function core_save_apply_inventory(
 }
 
 
+// ====================================================================
+// APPLY COMPLETE SAVE DATA
+// ====================================================================
+
 function core_save_apply_data(
     _save_data
 )
@@ -371,7 +415,12 @@ function core_save_apply_data(
             )
         );
 
-    if (_save_version != 1)
+    // Version 1 saves load without farming-world data.
+    // Version 2 saves include farming-world data.
+    if (
+        _save_version < 1 ||
+        _save_version > 2
+    )
     {
         return false;
     }
@@ -385,6 +434,21 @@ function core_save_apply_data(
         ) ||
         !variable_global_exists(
             "game_time"
+        )
+    )
+    {
+        return false;
+    }
+
+    if (
+        !is_struct(
+            global.player_inventory
+        ) ||
+        !is_struct(
+            global.survival
+        ) ||
+        !is_struct(
+            global.game_time
         )
     )
     {
@@ -469,6 +533,11 @@ function core_save_apply_data(
             0
         );
 
+
+    // ------------------------------------------------------------
+    // INVENTORY
+    // ------------------------------------------------------------
+
     if (
         !core_save_apply_inventory(
             global.player_inventory,
@@ -478,6 +547,11 @@ function core_save_apply_data(
     {
         return false;
     }
+
+
+    // ------------------------------------------------------------
+    // SURVIVAL
+    // ------------------------------------------------------------
 
     var _survival =
         global.survival;
@@ -572,6 +646,11 @@ function core_save_apply_data(
         _survival.is_dead = true;
     }
 
+
+    // ------------------------------------------------------------
+    // GAME TIME
+    // ------------------------------------------------------------
+
     global.game_time.total_minutes =
         max(
             0,
@@ -584,6 +663,11 @@ function core_save_apply_data(
             0,
             0.999999
         );
+
+
+    // ------------------------------------------------------------
+    // HOTBAR
+    // ------------------------------------------------------------
 
     var _hotbar_max =
         min(
@@ -623,6 +707,11 @@ function core_save_apply_data(
             _hotbar_max - 1
         );
 
+
+    // ------------------------------------------------------------
+    // PLAYER POSITION
+    // ------------------------------------------------------------
+
     _player.x = _player_x;
     _player.y = _player_y;
 
@@ -632,9 +721,38 @@ function core_save_apply_data(
     _player.yprevious =
         _player_y;
 
+
+    // ------------------------------------------------------------
+    // FARMING WORLD
+    // ------------------------------------------------------------
+
+    var _farming_world =
+        core_save_get(
+            _save_data,
+            "farming_world",
+            undefined
+        );
+
+    if (!is_undefined(_farming_world))
+    {
+        if (
+            !is_struct(_farming_world) ||
+            !farming_save_apply_data(
+                _farming_world
+            )
+        )
+        {
+            return false;
+        }
+    }
+
     return true;
 }
 
+
+// ====================================================================
+// FORMAT SAVE SUMMARY
+// ====================================================================
 
 function core_save_format_summary(
     _save_data

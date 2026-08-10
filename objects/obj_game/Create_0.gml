@@ -6,6 +6,10 @@ display_set_gui_size(
     1920,
     1080
 );
+
+
+// INPUT CONTROLLER
+
 if (
     !instance_exists(
         obj_input_controller
@@ -19,17 +23,43 @@ if (
         obj_input_controller
     );
 }
+
+
+// FARMING CONTROLLER
+
+if (
+    !instance_exists(
+        obj_farming_controller
+    )
+)
+{
+    instance_create_depth(
+        0,
+        0,
+        -1000000000000,
+        obj_farming_controller
+    );
+}
+
+
 gpu_set_texfilter(false);
 
 global.game_font =
     fnt_pixel;
 
+
+// DATABASES
+
 item_database_create();
+farm_crop_database_create();
 crafting_recipe_database_create();
 tree_species_database_create();
-vegetation_sway_initialize();
 campfire_recipe_database_create();
-crop_database_create();
+
+vegetation_sway_initialize();
+
+
+// GLOBAL GAMEPLAY STATE
 
 global.gameplay_lock_owner =
     noone;
@@ -45,10 +75,14 @@ global.hotbar_selected = 0;
 
 global.survival =
     new SurvivalSystem();
-	
-// for debuginn shit
+
+
+// TEMPORARY DEBUG ITEMS
+
+
+
 global.player_inventory.add_item(
-    ItemID.Pumpkin_seed,
+    ItemID.Kamote_seed,
     10
 );
 
@@ -62,8 +96,3 @@ global.player_inventory.add_item(
     1
 );
 
-global.player_inventory.add_item(
-    ItemID.Compost,
-    10
-);
-	

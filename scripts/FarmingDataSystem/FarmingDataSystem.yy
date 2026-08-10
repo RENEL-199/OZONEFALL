@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"CropSystem",
+  "%Name":"FarmingDataSystem",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"CropSystem",
+  "name":"FarmingDataSystem",
   "parent":{
     "name":"Farming",
     "path":"folders/Scripts/Farming.yy",

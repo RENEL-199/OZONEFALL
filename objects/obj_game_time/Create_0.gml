@@ -9,7 +9,7 @@ depth = -bbox_bottom*5;
 
 global.game_time = new GameTime(
     1,
-    15,
+    6,
     0
 );
 

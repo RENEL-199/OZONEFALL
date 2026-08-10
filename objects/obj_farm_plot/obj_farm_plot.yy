@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_crop_parent",
+  "%Name":"obj_farm_plot",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_crop_parent",
+  "name":"obj_farm_plot",
   "overriddenProperties":[],
   "parent":{
     "name":"Farm",
@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_soils",
+    "path":"sprites/spr_soils/spr_soils.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

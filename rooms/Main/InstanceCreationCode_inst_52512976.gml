@@ -9,7 +9,7 @@ chest_inventory.add_item(
 );
 
 chest_inventory.add_item(
-    ItemID.Wild_berry_kebab,
+    ItemID.Compost,
     1
 );
 

@@ -167,7 +167,7 @@ function vegetation_create_drop(
             _drop_x,
             _drop_y,
             -_drop_y * 2,
-            obj_pickup_parent
+            obj_pickable_parent
         );
 
     if (!instance_exists(_drop))

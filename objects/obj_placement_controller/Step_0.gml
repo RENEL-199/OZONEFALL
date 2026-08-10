@@ -152,8 +152,29 @@ preview_valid =
         preview_y,
         _player
     );
+	
 
-
+if (
+    preview_valid &&
+    placement_object ==
+    obj_farm_plot
+)
+{
+    if (
+        collision_rectangle(
+            preview_x - 7,
+            preview_y - 7,
+            preview_x + 7,
+            preview_y + 7,
+            obj_farm_plot,
+            false,
+            true
+        ) != noone
+    )
+    {
+        preview_valid = false;
+    }
+}
 // ====================================================================
 // TREE SEED AND SOIL VALIDATION
 // ====================================================================
@@ -164,9 +185,9 @@ var _placing_tree_seed =
     );
 
 var _placing_crop_seed =
-    crop_is_seed(
-        placement_item_id
-    );
+farm_item_is_seed(
+    placement_item_id
+);
 
 var _requires_soil =
     _placing_tree_seed ||
@@ -181,7 +202,7 @@ if (_requires_soil)
         instance_position(
             preview_x,
             preview_y,
-            obj_plantable_soil
+            obj_farm_plot
         );
 
     if (!instance_exists(_target_soil))
@@ -211,7 +232,7 @@ else
         instance_position(
             preview_x,
             preview_y,
-            obj_plantable_soil
+            obj_farm_plot
         ) != noone
     )
     {
@@ -243,7 +264,7 @@ if (_requires_soil)
         instance_position(
             preview_x,
             preview_y,
-            obj_plantable_soil
+            obj_farm_plot
         );
 
     if (
