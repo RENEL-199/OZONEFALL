@@ -92,7 +92,7 @@ else
 restoration_radius_tiles = 16;
 
 // Five game hours between successfully restored tiles.
-minutes_per_tile = 1;
+minutes_per_tile = 60 * 2;
 
 // Prevent large time skips from changing too many tiles in one frame.
 maximum_tiles_per_step = 4;

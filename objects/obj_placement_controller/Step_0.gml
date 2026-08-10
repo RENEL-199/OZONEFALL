@@ -71,6 +71,81 @@ preview_y =
         device_mouse_y(0)
     );
 
+
+// Move placement one tile in front when the cursor is
+// directly underneath the player.
+var _player_foot_x =
+    _player.x;
+
+var _player_foot_y =
+    _player.bbox_bottom;
+
+var _preview_distance =
+    point_distance(
+        _player_foot_x,
+        _player_foot_y,
+        preview_x,
+        preview_y
+    );
+
+if (
+    _preview_distance <
+    minimum_player_preview_distance
+)
+{
+    var _offset_x = 0;
+    var _offset_y = 0;
+
+    var _facing = "down";
+
+    if (
+        variable_instance_exists(
+            _player,
+            "facing"
+        )
+    )
+    {
+        _facing =
+            _player.facing;
+    }
+
+    switch (_facing)
+    {
+        case "up":
+            _offset_y =
+                -placement_forward_offset;
+        break;
+
+        case "left":
+            _offset_x =
+                -placement_forward_offset;
+        break;
+
+        case "right":
+            _offset_x =
+                placement_forward_offset;
+        break;
+
+        default:
+            _offset_y =
+                placement_forward_offset;
+        break;
+    }
+
+    preview_x =
+        snap_placement_x(
+            _player_foot_x +
+            _offset_x
+        );
+
+    preview_y =
+        snap_placement_y(
+            _player_foot_y +
+            _offset_y
+        );
+}
+
+
 preview_valid =
     placement_position_is_valid(
         preview_x,
@@ -88,9 +163,19 @@ var _placing_tree_seed =
         placement_item_id
     );
 
+var _placing_crop_seed =
+    crop_is_seed(
+        placement_item_id
+    );
+
+var _requires_soil =
+    _placing_tree_seed ||
+    _placing_crop_seed;
+
 var _target_soil = noone;
 
-if (_placing_tree_seed)
+if (_requires_soil)
+
 {
     _target_soil =
         instance_position(
@@ -152,7 +237,7 @@ if (
 // RECHECK TREE SOIL
 // ====================================================================
 
-if (_placing_tree_seed)
+if (_requires_soil)
 {
     _target_soil =
         instance_position(
@@ -249,7 +334,7 @@ if (
 
 var _placement_succeeded = true;
 
-if (_placing_tree_seed)
+if (_requires_soil)
 {
     if (
         !instance_exists(_target_soil) ||

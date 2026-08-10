@@ -29,6 +29,7 @@ crafting_recipe_database_create();
 tree_species_database_create();
 vegetation_sway_initialize();
 campfire_recipe_database_create();
+crop_database_create();
 
 global.gameplay_lock_owner =
     noone;
@@ -44,3 +45,25 @@ global.hotbar_selected = 0;
 
 global.survival =
     new SurvivalSystem();
+	
+// for debuginn shit
+global.player_inventory.add_item(
+    ItemID.Pumpkin_seed,
+    10
+);
+
+global.player_inventory.add_item(
+    ItemID.Hoe,
+    1
+);
+
+global.player_inventory.add_item(
+    ItemID.Watering_Can,
+    1
+);
+
+global.player_inventory.add_item(
+    ItemID.Compost,
+    10
+);
+	

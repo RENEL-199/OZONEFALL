@@ -1,5 +1,6 @@
-
 event_inherited();
 
-item_id = ItemID.Pumpkin;
-
+crop_initialize(
+    id,
+    CropID.Pumpkin
+);

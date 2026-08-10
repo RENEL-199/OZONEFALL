@@ -341,7 +341,7 @@ global.item_database[
 	
 	function(_survival)
 	{
-		_survival.add_toxicity(-20);
+		_survival.add_toxicity(-25);
 		return true;
 	}
 	);
@@ -495,19 +495,22 @@ global.item_database[ItemID.Axe] = new ItemData(
     "A tool used to chop down trees."
 );
 
-global.item_database[ItemID.Hoe] = new ItemData(
-    "Hoe",
-    spr_hoe,
-    1,
-    "A tool used to make the soil plantable... I guess."
-);
+global.item_database[ItemID.Watering_Can] =
+    new ItemData(
+        "Watering Can",
+        spr_watering_can,
+        1,
+        "Holds up to 500 water. Each soil watering uses 50 water."
+    );
 
-global.item_database[ItemID.Watering_Can] = new ItemData(
-    "Watering Can",
-    spr_watering_can,
-    1,
-    "A tool used to hydrate Plants, if there's any left."
-);
+
+global.item_database[ItemID.Hoe] =
+    new ItemData(
+        "Hoe",
+        spr_hoe,
+        1,
+        "Used to prepare fertile soil for planting."
+    );
 	
 	
 //PRODUCED BY MACHINES	
@@ -550,7 +553,34 @@ global.item_database[ItemID.Compost] =
     );
 	
 	
-	
+	//// SEED ////
+	global.item_database[
+    ItemID.Pumpkin_seed
+] = new ItemData(
+    "Pumpkin Seeds",
+
+    spr_seeds,
+
+    99,
+
+    "Pumpkin seeds that can be planted in prepared soil.",
+
+    undefined,
+    undefined,
+
+    new ItemPlacementData(
+        obj_pumpkin,
+
+        spr_pumpkin_sheet,
+
+        {
+            grid_size    : 16,
+            cell_width   : 16,
+            cell_height  : 16,
+            crop_id      : CropID.Pumpkin
+        }
+    )
+);
 	
 	
 	

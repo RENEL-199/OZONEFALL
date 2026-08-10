@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_seed",
-    "path":"sprites/spr_seed/spr_seed.yy",
+    "name":"spr_seeds",
+    "path":"sprites/spr_seeds/spr_seeds.yy",
   },
   "spriteMaskId":null,
   "visible":true,

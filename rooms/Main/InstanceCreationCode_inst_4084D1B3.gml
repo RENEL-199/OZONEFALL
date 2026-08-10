@@ -3,3 +3,8 @@ chest_inventory.add_item(
     5
 );
 
+chest_inventory.add_item(
+    ItemID.Lagundi,
+    10
+);
+

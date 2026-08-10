@@ -1,3 +1,5 @@
+event_inherited();
+
 var _pulse = 0;
 
 if (completion_pulse_timer > 0)

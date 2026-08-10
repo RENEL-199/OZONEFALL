@@ -8,12 +8,12 @@
   "name":"obj_pumpkin",
   "overriddenProperties":[],
   "parent":{
-    "name":"Foods",
-    "path":"folders/Objects/Foods.yy",
+    "name":"Farm",
+    "path":"folders/Objects/Farm.yy",
   },
   "parentObjectId":{
-    "name":"obj_pickup_parent",
-    "path":"objects/obj_pickup_parent/obj_pickup_parent.yy",
+    "name":"obj_crop_parent",
+    "path":"objects/obj_crop_parent/obj_crop_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

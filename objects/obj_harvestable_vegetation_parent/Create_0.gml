@@ -1,5 +1,5 @@
 /// obj_harvestable_vegetation_parent — Create Event
-
+event_inherited()
 harvest_item_id =
     ItemID.None;
 

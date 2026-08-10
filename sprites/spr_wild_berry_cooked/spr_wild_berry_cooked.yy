@@ -2,9 +2,9 @@
   "$GMSprite":"v2",
   "%Name":"spr_wild_berry_cooked",
   "bboxMode":0,
-  "bbox_bottom":30,
-  "bbox_left":0,
-  "bbox_right":30,
+  "bbox_bottom":31,
+  "bbox_left":2,
+  "bbox_right":34,
   "bbox_top":1,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"21f9b6b8-eaa2-4e45-a203-c1a45ad870cb","name":"21f9b6b8-eaa2-4e45-a203-c1a45ad870cb","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"070e93eb-f85f-4072-9986-5042a79ad635","name":"070e93eb-f85f-4072-9986-5042a79ad635","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":32,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"97863136-4e70-47f1-9a92-08aadfb40f27","blendMode":0,"displayName":"default","isLocked":false,"name":"97863136-4e70-47f1-9a92-08aadfb40f27","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"92e2aa9b-157c-45a6-a944-46acabcebbde","blendMode":0,"displayName":"default","isLocked":false,"name":"92e2aa9b-157c-45a6-a944-46acabcebbde","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_wild_berry_cooked",
   "nineSlice":null,
@@ -69,13 +69,13 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"21f9b6b8-eaa2-4e45-a203-c1a45ad870cb","path":"sprites/spr_wild_berry_cooked/spr_wild_berry_cooked.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"f95f7e4c-5090-4054-b74d-4daeca0ea933","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"070e93eb-f85f-4072-9986-5042a79ad635","path":"sprites/spr_wild_berry_cooked/spr_wild_berry_cooked.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"5091a9a2-4759-4e96-856d-12eb99d775eb","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":16,
+    "xorigin":19,
     "yorigin":16,
   },
   "swatchColours":null,
@@ -86,5 +86,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":32,
+  "width":39,
 }

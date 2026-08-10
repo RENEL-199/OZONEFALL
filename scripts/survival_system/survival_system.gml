@@ -28,7 +28,7 @@ function SurvivalSystem() constructor
     toxicity_exposure_enabled = true;
 
     toxicity_exposure_interval_minutes =
-        2 * 60;
+        1 * 180;
 
     toxicity_exposure_amount = 5;
 

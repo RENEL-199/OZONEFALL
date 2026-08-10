@@ -49,7 +49,6 @@ function core_save_get_number(
     return _value;
 }
 
-
 function core_save_inventory_to_data(
     _inventory
 )
@@ -75,11 +74,20 @@ function core_save_inventory_to_data(
                 _slot_index
             ];
 
-        _saved_slots[_slot_index] =
+        var _saved_slot =
         {
-            item_id: _slot.item_id,
-            amount: _slot.amount
+            item_id : _slot.item_id,
+            amount  : _slot.amount
         };
+
+        if (!is_undefined(_slot.state))
+        {
+            _saved_slot.state =
+                _slot.state;
+        }
+
+        _saved_slots[_slot_index] =
+            _saved_slot;
     }
 
     return _saved_slots;
@@ -254,9 +262,7 @@ function core_save_apply_inventory(
     var _slots_to_restore =
         min(
             _inventory.size,
-            array_length(
-                _saved_slots
-            )
+            array_length(_saved_slots)
         );
 
     for (
@@ -276,24 +282,22 @@ function core_save_apply_inventory(
         }
 
         var _item_id =
-            core_save_get_number(
-                _saved_slot,
-                "item_id",
-                ItemID.None
+            floor(
+                core_save_get_number(
+                    _saved_slot,
+                    "item_id",
+                    ItemID.None
+                )
             );
 
         var _amount =
-            core_save_get_number(
-                _saved_slot,
-                "amount",
-                0
+            floor(
+                core_save_get_number(
+                    _saved_slot,
+                    "amount",
+                    0
+                )
             );
-
-        _item_id =
-            floor(_item_id);
-
-        _amount =
-            floor(_amount);
 
         if (
             _item_id == ItemID.None ||
@@ -320,13 +324,29 @@ function core_save_apply_inventory(
                 _item_data.max_stack
             );
 
-        _inventory.slots[
-            _slot_index
-        ].item_id = _item_id;
+        var _saved_state =
+            core_save_get(
+                _saved_slot,
+                "state",
+                undefined
+            );
 
-        _inventory.slots[
-            _slot_index
-        ].amount = _amount;
+        var _slot =
+            _inventory.slots[
+                _slot_index
+            ];
+
+        _slot.item_id =
+            _item_id;
+
+        _slot.amount =
+            _amount;
+
+        _slot.state =
+            inventory_restore_item_state(
+                _item_id,
+                _saved_state
+            );
     }
 
     return true;

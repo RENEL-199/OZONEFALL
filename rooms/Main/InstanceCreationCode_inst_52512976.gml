@@ -1,6 +1,6 @@
 chest_inventory.add_item(
     ItemID.Green_fiber,
-    99
+   10
 );
 
 chest_inventory.add_item(
@@ -9,12 +9,10 @@ chest_inventory.add_item(
 );
 
 chest_inventory.add_item(
-    ItemID.Watering_Can,
+    ItemID.Wild_berry_kebab,
     1
 );
 
-chest_inventory.add_item(
-    ItemID.Composter,
-    1
-);
+
+
 

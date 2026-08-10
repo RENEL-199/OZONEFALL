@@ -1,12 +1,6 @@
-event_inherited()
+event_inherited();
 
 can_interact = false;
-
-if (message_timer > 0)
-{
-    message_timer--;
-}
-
 
 var _player =
     instance_find(
@@ -19,8 +13,15 @@ if (!instance_exists(_player))
     exit;
 }
 
+var _nearest_container =
+    instance_nearest(
+        _player.x,
+        _player.y,
+        obj_water_container
+    );
 
 can_interact =
+    _nearest_container == id &&
     point_distance(
         x,
         y,
@@ -28,12 +29,11 @@ can_interact =
         _player.y
     ) <= interaction_range;
 
-
 if (
     can_interact &&
     !gameplay_input_is_locked() &&
-   player_input_interact_pressed()
+    player_input_interact_pressed()
 )
 {
-    fill_selected_bottle();
+    interact_with_water();
 }

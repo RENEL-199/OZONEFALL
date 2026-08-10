@@ -1,4 +1,4 @@
-event_inherited()
+event_inherited();
 
 sprite_index =
     spr_watercontainer;
@@ -9,13 +9,20 @@ image_speed = 0;
 depth =
     -bbox_bottom;
 
-
 maximum_water = 500;
 current_water = maximum_water;
 
 water_per_bottle = 100;
 
-image_speed = 0;
+interaction_range = 42;
+interaction_key = ord("E");
+
+can_interact = false;
+
+message = "";
+message_timer = 0;
+
+prompt_scale = 0.5;
 
 
 update_water_visual = function()
@@ -29,23 +36,6 @@ update_water_visual = function()
         image_index = 1;
     }
 };
-
-
-update_water_visual();
-
-
-
-
-interaction_range = 42;
-interaction_key = ord("E");
-
-can_interact = false;
-
-
-message = "";
-message_timer = 0;
-
-prompt_scale = 0.5;
 
 
 get_selected_empty_bottle_slot = function()
@@ -116,7 +106,7 @@ fill_selected_bottle = function()
     if (_slot_index == -1)
     {
         message =
-            "Select an Empty Water Bottle.";
+            "";
 
         message_timer = 120;
 
@@ -133,7 +123,7 @@ fill_selected_bottle = function()
     )
     {
         message =
-            "No room for the filled bottle.";
+            "";
 
         message_timer = 120;
 
@@ -149,13 +139,138 @@ fill_selected_bottle = function()
             0,
             maximum_water
         );
-		
-		update_water_visual();
 
-    message =
-        "Filled with Dirty Water.";
+    update_water_visual();
+
+   
 
     message_timer = 120;
 
     return true;
 };
+
+
+fill_selected_watering_can = function()
+{
+    var _slot =
+        farming_get_selected_slot();
+
+    if (
+        is_undefined(_slot) ||
+        _slot.item_id !=
+        ItemID.Watering_Can
+    )
+    {
+        message =
+            "";
+
+        message_timer = 120;
+
+        return false;
+    }
+
+    _slot.state =
+        inventory_restore_item_state(
+            ItemID.Watering_Can,
+            _slot.state
+        );
+
+    if (
+        _slot.state.current_water >=
+        _slot.state.maximum_water
+    )
+    {
+
+
+        message_timer = 120;
+
+        return false;
+    }
+
+    if (current_water <= 0)
+    {
+        message =
+            "";
+
+        message_timer = 120;
+
+        return false;
+    }
+
+    var _transferred =
+        watering_can_refill_slot(
+            _slot,
+            current_water
+        );
+
+    if (_transferred <= 0)
+    {
+        message =
+            "";
+
+        message_timer = 120;
+
+        return false;
+    }
+
+    current_water -=
+        _transferred;
+
+    current_water =
+        clamp(
+            current_water,
+            0,
+            maximum_water
+        );
+
+    update_water_visual();
+
+
+
+    message_timer = 120;
+
+    return true;
+};
+
+
+interact_with_water = function()
+{
+    var _slot =
+        farming_get_selected_slot();
+
+    if (is_undefined(_slot))
+    {
+        
+
+        message_timer = 120;
+
+        return false;
+    }
+
+    if (
+        _slot.item_id ==
+        ItemID.Watering_Can
+    )
+    {
+        return
+            fill_selected_watering_can();
+    }
+
+    if (
+        _slot.item_id ==
+        ItemID.Empty_water_bottle
+    )
+    {
+        return
+            fill_selected_bottle();
+    }
+
+
+
+    message_timer = 120;
+
+    return false;
+};
+
+
+update_water_visual();

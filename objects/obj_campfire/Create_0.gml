@@ -200,7 +200,7 @@ light_campfire = function()
 
     if (_available < fuel_cost)
     {
-        set_message(
+        player_say(
             "Requires " +
             string(fuel_cost) +
             " Split Logs."
@@ -217,7 +217,7 @@ light_campfire = function()
 
     if (_remaining > 0)
     {
-        set_message(
+        player_say(
             "Could not remove the fuel."
         );
 
@@ -237,7 +237,7 @@ light_campfire = function()
     fire_animation_position = 0;
     image_index = fire_first_frame;
 
-    set_message(
+    player_say(
         "The campfire crackles to life.",
         180
     );
@@ -265,13 +265,13 @@ extinguish = function()
         cook_start_timestamp = 0;
         cook_finish_timestamp = 0;
 
-        set_message(
+        player_say(
             "The fire died before the food finished."
         );
     }
     else
     {
-        set_message(
+        player_say(
             "The campfire went out."
         );
     }
@@ -341,7 +341,7 @@ start_cooking = function(
 {
     if (!lit)
     {
-        set_message(
+        player_say(
             "The campfire is not burning."
         );
 
@@ -350,7 +350,7 @@ start_cooking = function(
 
     if (is_cooking)
     {
-        set_message(
+        player_say(
             "Something is already cooking."
         );
 
@@ -359,7 +359,7 @@ start_cooking = function(
 
     if (pending_output_amount > 0)
     {
-        set_message(
+        player_say(
             "Make room for the cooked item."
         );
 
@@ -386,7 +386,7 @@ start_cooking = function(
         _recipe.duration_minutes
     )
     {
-        set_message(
+        player_say(
             "Not enough fire time remains."
         );
 
@@ -400,7 +400,7 @@ start_cooking = function(
         )
     )
     {
-        set_message(
+        player_say(
             "Missing ingredients."
         );
 
@@ -414,7 +414,7 @@ start_cooking = function(
         )
     )
     {
-        set_message(
+        player_say(
             "Could not consume ingredients."
         );
 
@@ -434,7 +434,7 @@ start_cooking = function(
 
     is_cooking = true;
 
-    set_message(
+    player_say(
         "Cooking " +
         _recipe.name +
         "..."
@@ -517,7 +517,7 @@ complete_cooking = function()
 
     completion_pulse_timer = 30;
 
-    set_message(
+    player_say(
         _recipe.name +
         " is ready!",
         210

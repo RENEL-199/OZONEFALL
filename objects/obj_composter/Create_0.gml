@@ -18,7 +18,7 @@ material_capacity = 20;
 stored_materials = 0;
 
 processing_duration_minutes =
-    10;
+    60 * 6;
 
 processing_start_timestamp = 0;
 processing_finish_timestamp = 0;
@@ -445,5 +445,10 @@ complete_processing = function()
     return true;
 };
 
+interaction_range = 28;
 
+interaction_action = function()
+{
+    return add_selected_material();
+};
 update_visual_state();

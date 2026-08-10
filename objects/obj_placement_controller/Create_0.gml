@@ -1,6 +1,7 @@
 persistent = true;
 depth = -1000000;
-
+minimum_player_preview_distance = 12;
+placement_forward_offset = 20;
 placement_active = false;
 
 placement_item_id =
@@ -60,7 +61,7 @@ placement_blocker_objects =
     obj_fadeble,
     obj_harvestable_tree_parent,
     obj_harvestable_vegetation_parent,
-    
+    obj_crop_parent,
     obj_campfire,
     obj_composter,
     obj_crafting_table,
