@@ -107,9 +107,9 @@ if (lit)
 if (can_interact)
 {
     var _prompt =
-        "[E] Add " +
+        "[E]" +
         string(fuel_cost) +
-        " Split Logs";
+        "";
 
     if (lit)
     {

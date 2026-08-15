@@ -241,6 +241,19 @@ if (_slot.item_id == ItemID.Hoe)
 
     if (_plot.hoe())
     {
+        if (
+            variable_instance_exists(
+                _player,
+                "start_action_animation"
+            )
+        )
+        {
+            _player.start_action_animation(
+                "hoe",
+                15
+            );
+        }
+
         repeat (3)
         {
             effect_create_above(

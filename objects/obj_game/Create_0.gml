@@ -53,6 +53,7 @@ global.game_font =
 item_database_create();
 farm_crop_database_create();
 crafting_recipe_database_create();
+salvage_recipe_database_create();
 tree_species_database_create();
 campfire_recipe_database_create();
 
@@ -82,13 +83,23 @@ global.survival =
 
 
 global.player_inventory.add_item(
-    ItemID.Kamote_seed,
-    10
+    ItemID.Pumpkin_seed,
+    5
 );
 
 global.player_inventory.add_item(
     ItemID.Hoe,
     1
+);
+
+global.player_inventory.add_item(
+    ItemID.Green_fiber,
+    99
+);
+
+global.player_inventory.add_item(
+    ItemID.Compost,
+    20
 );
 
 global.player_inventory.add_item(

@@ -1,8 +1,10 @@
-if (!placement_active)
+if (
+    !placement_active ||
+    placement_input_delay > 0
+)
 {
     exit;
 }
-
 
 var _player =
     instance_find(
@@ -15,14 +17,11 @@ if (!instance_exists(_player))
     exit;
 }
 
-
 var _grid =
     placement_grid_size;
 
 var _half_grid =
-    _grid *
-    0.5;
-
+    _grid * 0.5;
 
 var _left_column =
     floor(
@@ -61,8 +60,8 @@ var _bottom_row =
     );
 
 
-// White placement grid
 draw_set_color(c_white);
+
 draw_set_alpha(
     grid_outline_alpha
 );
@@ -120,7 +119,6 @@ for (
 }
 
 
-// Selected cell
 if (preview_valid)
 {
     draw_set_color(
@@ -138,25 +136,61 @@ draw_set_alpha(
     selected_grid_alpha
 );
 
+
+var _selected_left =
+    preview_center_x -
+    placement_cell_width * 0.5;
+
+var _selected_top =
+    preview_center_y -
+    placement_cell_height * 0.5;
+
+for (
+    var _row = 0;
+    _row < placement_footprint_rows;
+    _row++
+)
+{
+    for (
+        var _column = 0;
+        _column <
+        placement_footprint_columns;
+        _column++
+    )
+    {
+        var _cell_left =
+            _selected_left +
+            _column *
+            placement_grid_size;
+
+        var _cell_top =
+            _selected_top +
+            _row *
+            placement_grid_size;
+
+        draw_rectangle(
+            _cell_left,
+            _cell_top,
+            _cell_left +
+            placement_grid_size,
+            _cell_top +
+            placement_grid_size,
+            true
+        );
+    }
+}
+
+
 draw_rectangle(
-    preview_x -
-    placement_cell_width * 0.5,
-    preview_y -
-    placement_cell_height * 0.5,
-    preview_x +
-    placement_cell_width * 0.5,
-    preview_y +
-    placement_cell_height * 0.5,
+    preview_left,
+    preview_top,
+    preview_right,
+    preview_bottom,
     true
 );
 
 
-// Item preview
-if (
-    sprite_exists(
-        placement_sprite
-    )
-)
+if (sprite_exists(placement_sprite))
 {
     var _preview_blend =
         valid_color;
@@ -181,17 +215,14 @@ if (
 }
 
 
-// Placement controls
 draw_set_halign(fa_center);
 draw_set_valign(fa_bottom);
 draw_set_color(c_white);
 draw_set_alpha(0.90);
 
 draw_text_transformed(
-    preview_x,
-    preview_y -
-    placement_cell_height * 0.5 -
-    5,
+    preview_center_x,
+    preview_top - 5,
     "[LMB] Place   [RMB] Cancel",
     0.45,
     0.45,

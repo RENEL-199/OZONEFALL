@@ -30,7 +30,13 @@ enum ItemID
 	Pumpkin_seed = 25,
 	Pumpkin = 26,
 	Kamote_seed = 27,
-	Kamote = 28
+	Kamote = 28,
+	Clock = 29,
+	Cloth = 30,
+	Electronic_part = 31,
+	Wire = 32,
+	Tv = 33
+	
 }
 
 
@@ -381,9 +387,45 @@ global.item_database[
     // ================================================================
 	    global.item_database[ItemID.Metal_scrap] = new ItemData(
         "Meatl Scrap",
-        spr_metal_scrap,
+        spr_metal_sracp_icon,
         20,
         "A rusty metal scrap. Hope I wont get Tetanus."
+    );
+	
+	
+		global.item_database[ItemID.Clock] = new ItemData(
+        "Clock",
+        spr_clock_icon,
+        1,
+        "Tick.... Tock... Tick... Tock..."
+    );
+	
+		global.item_database[ItemID.Tv] = new ItemData(
+        "TV",
+        spr_tv_icon,
+        1,
+        "A Broken TV..."
+    );
+	
+			global.item_database[ItemID.Cloth] = new ItemData(
+        "Cloth",
+        spr_cloth_icon,
+        99,
+        "A fabric... A dirty Fabric"
+    );
+	
+				global.item_database[ItemID.Electronic_part] = new ItemData(
+        "Electronic Part",
+        spr_electronic_part_icon,
+        50,
+        "with the power of my brain. I must think of something for this"
+    );
+	
+				global.item_database[ItemID.Wire] = new ItemData(
+        "Wire",
+        spr_wire_icon,
+        99,
+        "Just a Wire. use to conduct electricity for connectivity"
     );
 	
 	
@@ -437,38 +479,66 @@ global.item_database[
 // Placeable
 // ================================================================
 
-global.item_database[ItemID.Campfire] =
-    new ItemData(
-        "Campfire",
+global.item_database[
+    ItemID.Campfire
+] = new ItemData(
+    "Campfire",
+    spr_campfire,
+    1,
+    "A placeable Campfire. Requires 10 Split Logs to burn for 5 hours.",
+
+    undefined,
+    undefined,
+
+    new ItemPlacementData(
+        obj_campfire,
         spr_campfire,
-        1,
-        "A placeable Campfire. Requires 10 Split Logs to burn for 5 hours.",
 
-        undefined,
-        undefined,
+        {
+            grid_size: 16,
 
-        new ItemPlacementData(
-            obj_campfire,
-            spr_campfire
-        )
-    );
+            footprint_columns: 2,
+            footprint_rows: 2,
+
+            footprint_offset_x: 0,
+            footprint_offset_y: 10,
+
+            requires_farm_plot: false,
+            consumes_farm_plot: false
+        }
+    )
+);
 	
 	
-	global.item_database[ItemID.Composter] =
-    new ItemData(
-        "Composter",
+	global.item_database[
+    ItemID.Composter
+] = new ItemData(
+    "Composter",
+    spr_composter,
+    1,
+    "A composter that converts organic materials into compost.",
+
+    undefined,
+    undefined,
+
+    new ItemPlacementData(
+        obj_composter,
         spr_composter,
-        1,
-        "A Composter. For Farming Yeah Yeah. Smells like...",
 
-        undefined,
-        undefined,
+        {
+            grid_size: 16,
 
-        new ItemPlacementData(
-            obj_composter,
-            spr_composter
-        )
-    );
+            footprint_columns: 2,
+            footprint_rows: 2,
+
+            footprint_offset_x: 0,
+            footprint_offset_y: 0,
+
+            requires_farm_plot: false,
+            consumes_farm_plot: false
+        }
+    )
+);
 
 	
 // ================================================================

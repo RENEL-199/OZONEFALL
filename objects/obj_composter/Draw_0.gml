@@ -1,20 +1,3 @@
-event_inherited();
-
-var _pulse = 0;
-
-if (completion_pulse_timer > 0)
-{
-    _pulse =
-        abs(
-            sin(
-                completion_pulse_timer *
-                0.35
-            )
-        ) *
-        0.06;
-}
-
-
 if (can_interact)
 {
     draw_highlight(
@@ -23,15 +6,6 @@ if (can_interact)
         x,
         y
     );
-
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_bottom);
-    draw_set_color(c_white);
-
-
-
-    draw_set_halign(fa_left);
-    draw_set_valign(fa_top);
 }
 else
 {
@@ -39,18 +13,16 @@ else
 }
 
 
-// Lightweight processing particles
+// ================================================================
+// PROCESSING PARTICLES
+// ================================================================
+
 if (is_processing)
 {
     var _time =
-        current_time /
-        1000;
+        current_time / 1000;
 
-    for (
-        var _i = 0;
-        _i < 3;
-        _i++
-    )
+    for (var _i = 0; _i < 3; _i++)
     {
         var _particle_life =
             frac(
@@ -115,7 +87,10 @@ if (is_processing)
 }
 
 
-// Filling or processing progress
+// ================================================================
+// PROGRESS
+// ================================================================
+
 if (
     stored_materials > 0 ||
     is_processing
@@ -146,6 +121,7 @@ if (
         bbox_top - 23;
 
     draw_set_alpha(0.88);
+
     draw_set_color(
         progress_background_color
     );
@@ -186,11 +162,13 @@ if (
 }
 
 
-// Interaction prompt
+// ================================================================
+// WORLD PROMPT
+// ================================================================
+
 if (can_interact)
 {
-    var _prompt =
-        "[E]";
+    var _prompt = "[E]";
 
     if (is_processing)
     {
@@ -208,6 +186,7 @@ if (can_interact)
 
     draw_set_alpha(1);
     draw_set_color(c_white);
+
     draw_set_halign(fa_center);
     draw_set_valign(fa_bottom);
 
@@ -222,7 +201,10 @@ if (can_interact)
 }
 
 
-// Feedback message
+// ================================================================
+// COMPOSTER FEEDBACK
+// ================================================================
+
 if (
     message_timer > 0 &&
     message != ""

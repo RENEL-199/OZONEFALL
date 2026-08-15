@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"CraftingUILayout",
   "parent":{
-    "name":"System",
-    "path":"folders/Scripts/System.yy",
+    "name":"UI",
+    "path":"folders/Scripts/UI.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

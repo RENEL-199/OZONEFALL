@@ -40,6 +40,9 @@ if (gameplay_input_is_locked())
     is_interacting = false;
     interact_timer = 0;
 
+    active_action_animation =
+        "interact";
+
     animation_manager.play_animation(
         "idle_" + facing
     );
@@ -52,7 +55,6 @@ if (gameplay_input_is_locked())
 
     exit;
 }
-
 
 // ================================================================
 // INPUT
@@ -112,8 +114,10 @@ if (
     !is_interacting
 )
 {
-    is_interacting = true;
-    interact_timer = 20;
+    start_action_animation(
+        "interact",
+        20
+    );
 }
 
 
@@ -285,7 +289,9 @@ if (is_interacting)
     yspeed = 0;
 
     animation_manager.play_animation(
-        "interact_" + facing
+        active_action_animation +
+        "_" +
+        facing
     );
 
     interact_timer--;
@@ -294,6 +300,13 @@ if (is_interacting)
     {
         interact_timer = 0;
         is_interacting = false;
+
+        active_action_animation =
+            "interact";
+
+        animation_manager.play_animation(
+            "idle_" + facing
+        );
     }
 }
 

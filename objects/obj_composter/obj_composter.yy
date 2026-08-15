@@ -13,7 +13,10 @@
     "name":"funish",
     "path":"folders/Objects/funish.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_fadeble",
+    "path":"objects/obj_fadeble/obj_fadeble.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

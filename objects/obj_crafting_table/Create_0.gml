@@ -2,7 +2,14 @@
 
 event_inherited();
 
+is_crafting_station = true;
 
+// This station has one material input slot.
+station_has_material_slot = true;
+
+// Current material
+material_slot_item_id = ItemID.None;
+material_slot_amount = 0;
 // ====================================================================
 // WORLD VISUALS
 // ====================================================================
@@ -20,7 +27,7 @@ depth = -bbox_bottom;
 // INTERACTION
 // ====================================================================
 
-interaction_range = 32;
+interaction_range = 48;
 interaction_key = ord("E");
 
 can_open = false;

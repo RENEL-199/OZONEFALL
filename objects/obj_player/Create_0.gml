@@ -219,4 +219,70 @@ animation_manager.add_animation(
     )
 );
 
+animation_manager.add_animation(
+    "hoe_down",
+    new Animation(
+        65,
+        68,
+        0.25
+    )
+);
+
+animation_manager.add_animation(
+    "hoe_left",
+    new Animation(
+        69,
+        72,
+        0.25
+    )
+);
+
+animation_manager.add_animation(
+    "hoe_right",
+    new Animation(
+        73,
+        76,
+        0.25
+    )
+);
+
+animation_manager.add_animation(
+    "hoe_up",
+    new Animation(
+        77,
+        81,
+        0.25
+    )
+);
+
+
+
 animation_manager.instance.image_speed = 0;
+
+active_action_animation =
+    "interact";
+
+start_action_animation = function(
+    _action_name,
+    _duration_steps = 20
+)
+{
+    active_action_animation =
+        string(_action_name);
+
+    is_interacting = true;
+
+    interact_timer =
+        max(
+            1,
+            floor(_duration_steps)
+        );
+
+    animation_manager.play_animation(
+        active_action_animation +
+        "_" +
+        facing
+    );
+
+    return true;
+};

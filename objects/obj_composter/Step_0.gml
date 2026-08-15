@@ -26,6 +26,7 @@ if (
 }
 
 
+
 // Start a full composter if game time was unavailable earlier.
 if (
     !is_processing &&
@@ -94,6 +95,18 @@ if (
     _interact_pressed
 )
 {
+	
+	
+	 if (is_processing)
+    {
+        player_say(
+            "The compost is still processing."
+        );
+
+        exit;
+    }
+	
+	
     if (is_processing)
     {
         if (

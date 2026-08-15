@@ -7,7 +7,7 @@ image_index = 0;
 depth = -bbox_bottom;
 
 
-interaction_range = 52;
+interaction_range = 32;
 interaction_key = ord("E");
 
 can_interact = false;

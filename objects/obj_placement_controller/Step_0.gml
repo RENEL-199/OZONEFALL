@@ -57,10 +57,6 @@ if (
 }
 
 
-// ====================================================================
-// GRID POSITION
-// ====================================================================
-
 preview_x =
     snap_placement_x(
         device_mouse_x(0)
@@ -72,8 +68,6 @@ preview_y =
     );
 
 
-// Move placement one tile in front when the cursor is
-// directly underneath the player.
 var _player_foot_x =
     _player.x;
 
@@ -114,22 +108,22 @@ if (
         case "up":
             _offset_y =
                 -placement_forward_offset;
-        break;
+            break;
 
         case "left":
             _offset_x =
                 -placement_forward_offset;
-        break;
+            break;
 
         case "right":
             _offset_x =
                 placement_forward_offset;
-        break;
+            break;
 
         default:
             _offset_y =
                 placement_forward_offset;
-        break;
+            break;
     }
 
     preview_x =
@@ -152,98 +146,87 @@ preview_valid =
         preview_y,
         _player
     );
-	
+
+preview_target_plot = noone;
+
+
+// ================================================================
+// TREE SOIL REQUIREMENT
+// ================================================================
 
 if (
     preview_valid &&
-    placement_object ==
-    obj_farm_plot
+    placement_requires_farm_plot
 )
 {
-    if (
-        collision_rectangle(
-            preview_x - 7,
-            preview_y - 7,
-            preview_x + 7,
-            preview_y + 7,
-            obj_farm_plot,
-            false,
-            true
-        ) != noone
-    )
-    {
-        preview_valid = false;
-    }
-}
-// ====================================================================
-// TREE SEED AND SOIL VALIDATION
-// ====================================================================
-
-var _placing_tree_seed =
-    tree_species_is_seed(
-        placement_item_id
-    );
-
-var _placing_crop_seed =
-farm_item_is_seed(
-    placement_item_id
-);
-
-var _requires_soil =
-    _placing_tree_seed ||
-    _placing_crop_seed;
-
-var _target_soil = noone;
-
-if (_requires_soil)
-
-{
-    _target_soil =
+    preview_target_plot =
         instance_position(
-            preview_x,
-            preview_y,
+            preview_center_x,
+            preview_center_y,
             obj_farm_plot
         );
 
-    if (!instance_exists(_target_soil))
-    {
-        preview_valid = false;
-    }
-    else if (
-        !variable_instance_exists(
-            _target_soil,
-            "can_accept_seed"
+    if (
+        !instance_exists(
+            preview_target_plot
         )
     )
     {
         preview_valid = false;
     }
-    else if (
-        !_target_soil.can_accept_seed()
-    )
+    else
     {
-        preview_valid = false;
+        var _plot_has_crop = false;
+
+        if (
+            variable_instance_exists(
+                preview_target_plot,
+                "has_valid_crop"
+            )
+        )
+        {
+            _plot_has_crop =
+                preview_target_plot
+                    .has_valid_crop();
+        }
+
+        if (_plot_has_crop)
+        {
+            preview_valid = false;
+        }
+
+        if (
+            variable_instance_exists(
+                preview_target_plot,
+                "is_fertile"
+            ) &&
+            !preview_target_plot.is_fertile
+        )
+        {
+            preview_valid = false;
+        }
     }
 }
-else
+else if (
+    preview_valid &&
+    collision_rectangle(
+        preview_left + 1,
+        preview_top + 1,
+        preview_right - 1,
+        preview_bottom - 1,
+        obj_farm_plot,
+        false,
+        true
+    ) != noone
+)
 {
-    // Other objects cannot be placed over fertile soil.
-    if (
-        instance_position(
-            preview_x,
-            preview_y,
-            obj_farm_plot
-        ) != noone
-    )
-    {
-        preview_valid = false;
-    }
+    preview_valid = false;
 }
 
 
-// ====================================================================
-// WAIT FOR VALID CONFIRMATION
-// ====================================================================
+// ================================================================
+// CONFIRM
+// ================================================================
 
 if (
     !preview_valid ||
@@ -254,26 +237,28 @@ if (
 }
 
 
-// ====================================================================
-// RECHECK TREE SOIL
-// ====================================================================
-
-if (_requires_soil)
+if (placement_requires_farm_plot)
 {
-    _target_soil =
+    preview_target_plot =
         instance_position(
-            preview_x,
-            preview_y,
+            preview_center_x,
+            preview_center_y,
             obj_farm_plot
         );
 
+    if (!instance_exists(preview_target_plot))
+    {
+        preview_valid = false;
+        exit;
+    }
+
     if (
-        !instance_exists(_target_soil) ||
-        !variable_instance_exists(
-            _target_soil,
-            "can_accept_seed"
-        ) ||
-        !_target_soil.can_accept_seed()
+        variable_instance_exists(
+            preview_target_plot,
+            "has_valid_crop"
+        ) &&
+        preview_target_plot
+            .has_valid_crop()
     )
     {
         preview_valid = false;
@@ -281,10 +266,6 @@ if (_requires_soil)
     }
 }
 
-
-// ====================================================================
-// REMOVE PLACEMENT ITEM
-// ====================================================================
 
 if (
     global.player_inventory.count_item(
@@ -295,6 +276,7 @@ if (
     cancel_placement(false);
     exit;
 }
+
 
 var _remaining =
     global.player_inventory.remove_item(
@@ -307,10 +289,6 @@ if (_remaining != 0)
     exit;
 }
 
-
-// ====================================================================
-// CREATE PLACED INSTANCE
-// ====================================================================
 
 var _placed_instance =
     instance_create_depth(
@@ -332,10 +310,6 @@ if (!instance_exists(_placed_instance))
 }
 
 
-// ====================================================================
-// APPLY PLACEMENT DATA
-// ====================================================================
-
 if (
     variable_instance_exists(
         _placed_instance,
@@ -349,64 +323,40 @@ if (
 }
 
 
-// ====================================================================
-// RESERVE SOIL FOR PLANTED TREE
-// ====================================================================
-
-var _placement_succeeded = true;
-
-if (_requires_soil)
+if (
+    placement_requires_farm_plot &&
+    placement_consumes_farm_plot
+)
 {
-    if (
-        !instance_exists(_target_soil) ||
-        !variable_instance_exists(
-            _target_soil,
-            "assign_crop"
-        )
-    )
+    if (!instance_exists(preview_target_plot))
     {
-        _placement_succeeded = false;
-    }
-    else
-    {
-        _placement_succeeded =
-            _target_soil.assign_crop(
-                _placed_instance
-            );
+        with (_placed_instance)
+        {
+            instance_destroy();
+        }
+
+        global.player_inventory.add_item(
+            placement_item_id,
+            1
+        );
+
+        preview_valid = false;
+        exit;
     }
 
-    if (_placement_succeeded)
-    {
-        _placed_instance.planted_soil_id =
-            _target_soil;
-    }
-}
-
-
-// ====================================================================
-// REFUND FAILED PLACEMENT
-// ====================================================================
-
-if (!_placement_succeeded)
-{
-    with (_placed_instance)
+    with (preview_target_plot)
     {
         instance_destroy();
     }
-
-    global.player_inventory.add_item(
-        placement_item_id,
-        1
-    );
-
-    preview_valid = false;
-    exit;
 }
 
 
-// ====================================================================
-// PLACEMENT DEPTH
-// ====================================================================
+register_placed_instance(
+    _placed_instance,
+    preview_center_x,
+    preview_center_y
+);
+
 
 if (
     variable_instance_exists(
@@ -416,7 +366,8 @@ if (
 )
 {
     _placed_instance.depth =
-        _placed_instance.placement_depth;
+        _placed_instance
+            .placement_depth;
 }
 else
 {

@@ -96,8 +96,8 @@ function crafting_recipe_database_create()
             ],
 
             30,
-            5,
-            8
+            3,
+            0
         );
 
 
@@ -118,8 +118,8 @@ function crafting_recipe_database_create()
             ],
 
             10,
-            5,
-            8
+            3,
+            3
         );
 
 
@@ -150,8 +150,8 @@ function crafting_recipe_database_create()
             ],
 
             60,
-            25,
-            20
+            10,
+            5
         );
 
 
@@ -182,8 +182,8 @@ function crafting_recipe_database_create()
             ],
 
             60,
-            35,
-            28
+            10,
+            5
         );
 		
 		
@@ -209,8 +209,8 @@ function crafting_recipe_database_create()
             ],
 
             60,
-            15,
-            15
+            5,
+            0
         );
 		
 		
